@@ -14,7 +14,7 @@
 		<p>The challenge is, to change the code in a way so that DoModalConfirm directly returns the value that represents the user's choice.</p>
 		<p>I fear this is an impossible mission. I really do.</p>
 		<p>Good Luck!</p>
-		<p>Please submit your solutions to <a href="mail:saschawildgrube@gmail.com">saschawildgrube@gmail.com</a> or create a pull request to the repo.</p>
+		<p>Please submit your solutions to <a href="mail:saschawildgrube@gmail.com">saschawildgrube@gmail.com</a> or create a pull request to the <a href="https://github.com/saschawildgrube/js-modal-challenge/" target="_blank">repo</a>.</p>
 	
 		<button onClick="onClickButtonOne();">Button One</button>
 
@@ -66,14 +66,15 @@
 
 	function onClickButtonOne()
 	{
-		var bResult1 = confirm('Question 1');
+		var bResult1 = confirm('Question 1?');
 		if (bResult1 == true)
 		{
-			DoModalConfirm('Question 1: Answer: Yes\n\nQuestion 2',
-			function(bResult)
-			{
-				alert('The Answer is: '+((bResult === true)?('Yes'):('No')));
-			});
+			DoModalConfirm('Question 1: Answer: Yes<br/><br/>Question 2?',
+				function(bResult)
+				{
+					alert('The Answer is: '+((bResult === true)?('Yes'):('No')));
+				});
+				
 			/*
 			
 			// Challenge: Modify the DoModalConfirm function to work like this...
@@ -82,6 +83,7 @@
 			alert('The Answer is: '+((bResult2)?('Yes'):('No')));
 			
 			*/
+			
 		}
 		else
 		{
