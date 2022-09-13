@@ -7,14 +7,14 @@
 		<p>"Callback hell" describes the fact that a linear execution flow often cannot be expressed as such as many operations require to "fork" out of the current execution flow and can only continue within a provided callback function.</p>
 		<p>The setTimeout function is one of the examples. What we WANT is a function that performs a non-<a href="https://en.wikipedia.org/wiki/Busy_waiting" target="_blank">busy wait</a> for (at least) a number of milliseconds. But what is DOES is a fork out of the current execution flow and the execution of a callback function after (at least) the given milliseconds.</p>
 		<p>Based on my current knowledge (as of 2022-09-11) the reason is the <a href="https://www.geeksforgeeks.org/why-javascript-is-a-single-thread-language-that-can-be-non-blocking/" target="_blank">single threaded event loop</a> of the JavaScript runtime engine. Within an engine context (like a browser window) only ONE execution flow can be processed at any given time - with no means to "halt" one flow in order to execute another and return. In a browser context this is a problem, as any DOM manipulations are processed AFTER the current execution flow is finished.</p>
-		<p>The only three functions in JavaScript (that I am aware of) which behave in the way I expect them to do are alert(), confirm() and prompt(). All three open up a modal dialog and require user input. The result is given back as the return value of these functions. That allows to respond to the user inout in the same linear execution flow without forking into a callback.</p>
+		<p>The only three functions in JavaScript (that I am aware of) which behave in the way I expect them to are alert(), confirm() and prompt(). All three open up a modal dialog and require user input. The result is given back as the return value of these functions. That allows to respond to the user input in the same linear execution flow without forking into a callback.</p>
 		<p>Design and functionality of these three modal dialogs is limited. So I tried to do the same with beautifully designed (well...) DOM-based structures.</p>
 		<p>And yes, so far, I failed miserably.</p>
 		<p>Check out the source code of this page and check out the difference between the two ways the answers are processed.</p>
 		<p>The challenge is, to change the code in a way so that DoModalConfirm directly returns the value that represents the user's choice.</p>
 		<p>I fear this is an impossible mission. I really do.</p>
 		<p>Good Luck!</p>
-		<p>Please submit your solutions to <a href="mail:saschawildgrube@gmail.com</a> or create a pull request to the repo.</p>
+		<p>Please submit your solutions to <a href="mail:saschawildgrube@gmail.com">saschawildgrube@gmail.com</a> or create a pull request to the repo.</p>
 	
 		<button onClick="onClickButtonOne();">Button One</button>
 
@@ -68,7 +68,7 @@
 			DoModalConfirm('Question 1: Answer: Yes\n\nQuestion 2',
 			function(bResult)
 			{
-				alert('The Answer is: '+(bResult)?('Yes'):('No'));
+				alert('The Answer is: '+(bResult === true)?('Yes'):('No'));
 			});
 			/*
 			
