@@ -34,28 +34,32 @@
 	
 		<div id="modal" style="
 			display: none;
-			position: relative;
+			position: absolute;
+			top: 0px;
 			z-index: 100;
-			margin:auto;
-			margin-top: 40px;
-			padding-top: 20px;
-			padding-bottom: 20px;
-			padding-left: 20px;
-			padding-right: 20px;
-			background-color: white;
-			opacity: 1.0;
-			border-radius: 20px;
-			width: 30%;
-			text-align: left;
-			pointer-events: auto;
+			width: 100%;
 			">
-	
-			<div id="modal-text">Loram Ipsum...</div>
-			<div style="text-align: right; width: 100%;">
-				<button id="modal-ok">OK</button>
-				<button id="modal-cancel">Cancel</button>
+			<div style="
+				width: 30%;
+				border-radius: 20px;
+				margin:auto;
+				margin-top: 40px;
+				padding-top: 20px;
+				padding-bottom: 20px;
+				padding-left: 20px;
+				padding-right: 20px;
+				background-color: white;
+				opacity: 1.0;
+				text-align: left;
+				pointer-events: auto;
+				">
+		
+				<div id="modal-text">Loram Ipsum...</div>
+				<div style="text-align: right; width: 100%; padding-top: 5px;">
+					<button id="modal-ok">OK</button>
+					<button id="modal-cancel">Cancel</button>
+				</div>
 			</div>
-			
 		</div>
 	
 <script>
