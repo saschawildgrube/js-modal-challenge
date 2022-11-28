@@ -1,24 +1,45 @@
 <html>
-	<body>
-		
-		<h1>JavaScript Modal Challenge</h1>
-		<p>I believe, JavaScript is deeply broken. Some of its structures and typical patterns PREVENT the creation of clean, readable, maintainable code.</p>
-		<p>One of the main reasons for this belief is what is often referred to as the "<a href="http://callbackhell.com/" target="_blank">callback hell</a>".</p>
-		<p>"Callback hell" describes the fact that a linear execution flow often cannot be expressed as such as many operations require to "fork" out of the current execution flow and can only continue within a provided callback function.</p>
-		<p>The setTimeout function is one of the examples. What we WANT is a function that performs a non-<a href="https://en.wikipedia.org/wiki/Busy_waiting" target="_blank">busy wait</a> for (at least) a number of milliseconds. But what is DOES is a fork out of the current execution flow and the execution of a callback function after (at least) the given milliseconds.</p>
-		<p>Based on my current knowledge (as of 2022-09-11) the reason is the <a href="https://www.geeksforgeeks.org/why-javascript-is-a-single-thread-language-that-can-be-non-blocking/" target="_blank">single threaded event loop</a> of the JavaScript runtime engine. Within an engine context (like a browser window) only ONE execution flow can be processed at any given time - with no means to "halt" one flow in order to execute another and return. In a browser context this is a problem, as any DOM manipulations are processed AFTER the current execution flow is finished.</p>
-		<p>The only three functions in JavaScript (that I am aware of) which behave in the way I expect them to are alert(), confirm() and prompt(). All three open up a modal dialog and require user input. The result is given back as the return value of these functions. That allows to respond to the user input in the same linear execution flow without forking into a callback.</p>
-		<p>Design and functionality of these three modal dialogs is limited. So I tried to do the same with beautifully designed (well...) DOM-based structures.</p>
-		<p>And yes, so far, I failed miserably.</p>
-		<p>Check out the source code of this page and check out the difference between the two ways the answers are processed.</p>
-		<p>The challenge is, to change the code in a way so that DoModalConfirm directly returns the value that represents the user's choice.</p>
-		<p>I fear this is an impossible mission. I really do.</p>
-		<p>Good Luck!</p>
-		<p>Please submit your solutions to <a href="mail:saschawildgrube@gmail.com">saschawildgrube@gmail.com</a> or create a pull request to the <a href="https://github.com/saschawildgrube/js-modal-challenge/" target="_blank">repo</a>.</p>
-	
-		<button onClick="onClickButtonOne();">Button One</button>
 
-		<div id="modal-overlay" style="
+<body>
+
+    <h1>JavaScript Modal Challenge</h1>
+    <p>I believe, JavaScript is deeply broken. Some of its structures and typical patterns PREVENT the creation of
+        clean, readable, maintainable code.</p>
+    <p>One of the main reasons for this belief is what is often referred to as the "<a href="http://callbackhell.com/"
+            target="_blank">callback hell</a>".</p>
+    <p>"Callback hell" describes the fact that a linear execution flow often cannot be expressed as such as many
+        operations require to "fork" out of the current execution flow and can only continue within a provided callback
+        function.</p>
+    <p>The setTimeout function is one of the examples. What we WANT is a function that performs a non-<a
+            href="https://en.wikipedia.org/wiki/Busy_waiting" target="_blank">busy wait</a> for (at least) a number of
+        milliseconds. But what is DOES is a fork out of the current execution flow and the execution of a callback
+        function after (at least) the given milliseconds.</p>
+    <p>Based on my current knowledge (as of 2022-09-11) the reason is the <a
+            href="https://www.geeksforgeeks.org/why-javascript-is-a-single-thread-language-that-can-be-non-blocking/"
+            target="_blank">single threaded event loop</a> of the JavaScript runtime engine. Within an engine context
+        (like a browser window) only ONE execution flow can be processed at any given time - with no means to "halt" one
+        flow in order to execute another and return. In a browser context this is a problem, as any DOM manipulations
+        are processed AFTER the current execution flow is finished.</p>
+    <p>The only three functions in JavaScript (that I am aware of) which behave in the way I expect them to are alert(),
+        confirm() and prompt(). All three open up a modal dialog and require user input. The result is given back as the
+        return value of these functions. That allows to respond to the user input in the same linear execution flow
+        without forking into a callback.</p>
+    <p>Design and functionality of these three modal dialogs is limited. So I tried to do the same with beautifully
+        designed (well...) DOM-based structures.</p>
+    <p>And yes, so far, I failed miserably.</p>
+    <p>Check out the source code of this page and check out the difference between the two ways the answers are
+        processed.</p>
+    <p>The challenge is, to change the code in a way so that DoModalConfirm directly returns the value that represents
+        the user's choice.</p>
+    <p>I fear this is an impossible mission. I really do.</p>
+    <p>Good Luck!</p>
+    <p>Please submit your solutions to <a href="mail:saschawildgrube@gmail.com">saschawildgrube@gmail.com</a> or create
+        a pull request to the <a href="https://github.com/saschawildgrube/js-modal-challenge/" target="_blank">repo</a>.
+    </p>
+
+    <button onClick="onClickButtonOne();">Button One</button>
+
+    <div id="modal-overlay" style="
 			display: none;
 			background-color: grey;
 			opacity: 0.6;
@@ -28,18 +49,17 @@
 			height: 100%;
 			width: 100%;
 			z-index: 10; 
-			"
-			>
-		</div>
-	
-		<div id="modal" style="
+			">
+    </div>
+
+    <div id="modal" style="
 			display: none;
 			position: absolute;
 			top: 0px;
 			z-index: 100;
 			width: 100%;
 			">
-			<div style="
+        <div style="
 				width: 30%;
 				border-radius: 20px;
 				margin:auto;
@@ -53,79 +73,70 @@
 				text-align: left;
 				pointer-events: auto;
 				">
-		
-				<div id="modal-text">Loram Ipsum...</div>
-				<div style="text-align: right; width: 100%; padding-top: 5px;">
-					<button id="modal-ok">OK</button>
-					<button id="modal-cancel">Cancel</button>
-				</div>
-			</div>
-		</div>
-	
-<script>
 
-	function onClickButtonOne()
-	{
-		var bResult1 = confirm('Question 1?');
-		if (bResult1 == true)
-		{
-			DoModalConfirm('Question 1: Answer: Yes<br/><br/>Question 2?',
-				function(bResult)
-				{
-					alert('The Answer is: '+((bResult === true)?('Yes'):('No')));
-				});
-				
-			/*
-			
-			// Challenge: Modify the DoModalConfirm function to work like this...
-			
-			var bResult2 = DoModalConfirm('Question 1: Answer: Yes\n\nQuestion 2');
-			alert('The Answer is: '+((bResult2)?('Yes'):('No')));
-			
-			*/
-			
-		}
-		else
-		{
-			alert('Question 1: Answer: No');
-		}
-	}
-	
-	function DoModalConfirm(strText,callbackResult)
-	{
-		function ShowModal(bShow)
-		{
-			var strStyle = (bShow)?('block'):('none');
-			var elementModalOverlay = document.getElementById('modal-overlay');
-			elementModalOverlay.style.setProperty('display',strStyle );
-			var elementModal = document.getElementById('modal');
-			elementModal.style.setProperty('display',strStyle );
-		}
-		function onClickModalOK()
-		{
-			ShowModal(false);	
-			callbackResult(true);
-				
-		}
-		function onClickModalCancel()
-		{
-			ShowModal(false);
-			callbackResult(false);
-		}
-		
-		ShowModal(true);	
-		
-		var elementText = document.getElementById('modal-text');
-		elementText.innerHTML = strText;
-	
-		var elementModalOK = document.getElementById('modal-ok');
-		elementModalOK.onclick = onClickModalOK;
-		var elementModalCancel = document.getElementById('modal-cancel');
-		elementModalCancel.onclick = onClickModalCancel;
-		
-	}
+            <div id="modal-text">Loram Ipsum...</div>
+            <div style="text-align: right; width: 100%; padding-top: 5px;">
+                <button id="modal-ok">OK</button>
+                <button id="modal-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
 
-</script>
-	
-	</body>	
+    <script>
+
+       async function onClickButtonOne() {
+          
+               var result = await DoModalConfirm('Question 1: Answer: Yes<br/><br/>Question 2?');
+               alert(result);
+
+       }
+
+        function DoModalConfirm(strText, callbackResult) {
+            //resolve
+            function ShowModal(bShow) {
+                    var strStyle = (bShow) ? ('block') : ('none');
+                    var elementModalOverlay = document.getElementById('modal-overlay');
+                    elementModalOverlay.style.setProperty('display', strStyle);
+                    var elementModal = document.getElementById('modal');
+                    elementModal.style.setProperty('display', strStyle);
+                }
+                ShowModal(true);
+                
+            return new Promise(resolve => {
+
+                function onClickModalOK()
+              {
+                  ShowModal(false);	
+                  resolve("clicked ok");
+                  	
+              }
+              function onClickModalCancel()
+              {
+                  ShowModal(false);
+                  resolve("clicked cancel");
+              }
+          	
+              ShowModal(true);	
+          	
+              var elementText = document.getElementById('modal-text');
+              elementText.innerHTML = strText;
+      	
+              var elementModalOK = document.getElementById('modal-ok');
+              elementModalOK.onclick = onClickModalOK;
+              var elementModalCancel = document.getElementById('modal-cancel');
+              elementModalCancel.onclick = onClickModalCancel;
+    
+
+
+            });
+
+              
+              
+          
+        }
+
+    </script>
+
+</body>
+
 </html>
